@@ -776,6 +776,132 @@
         <li>Try switching from WiFi to wired LAN for more stable cloud connectivity</li>
       </ul>
     </div>
+
+    <!-- NETWORK CONNECTION METHODS -->
+    <h3 style="color: var(--accent); margin-bottom: 20px; margin-top: 36px;">📡 A200 Network Connection — All 4 Methods</h3>
+
+    <div class="alert yellow" style="margin-bottom: 24px;">
+      <div class="alert-icon">⚠️</div>
+      <div><strong>Important:</strong> For LAN mode or Cloud mode you MUST configure the network. For USB-only/standalone mode (direct PC control) you can skip network setup. Always connect via USB first to configure network settings.</div>
+    </div>
+
+    <div class="card-grid" style="margin-bottom: 30px;">
+      <div class="card">
+        <h3>📶 Way 1 — Player connects to WiFi</h3>
+        <p style="color: var(--subtext); font-size: 0.88rem;">Works for: <span class="tag green">LAN</span> <span class="tag">Cloud</span></p>
+        <ol class="steps" style="margin-top: 12px;">
+          <li>Connect A200 to PC via USB cable. Open PlayerMaster → select device under <strong>USB</strong> tab</li>
+          <li>Click the <strong>Network icon</strong> at the bottom of the interface</li>
+          <li>Select <strong>WiFi</strong> → choose your WiFi network name from the list</li>
+          <li>Enter the WiFi password → click <strong>Apply</strong> → click <strong>Test Network State</strong></li>
+          <li>Wait for <em>"The connection is successful"</em> message</li>
+          <li>Device now appears under <strong>LAN</strong> tab (same network) or <strong>Cloud</strong> tab (if cloud configured)</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>📱 Way 2 — PC connects to A200 WiFi Hotspot</h3>
+        <p style="color: var(--subtext); font-size: 0.88rem;">Works for: <span class="tag green">LAN</span> only</p>
+        <ol class="steps" style="margin-top: 12px;">
+          <li>The A200 hotspot is <strong>ON by default</strong> out of the box</li>
+          <li>Default WiFi name: <strong>player model number</strong> (e.g., A200-XXXX)</li>
+          <li>Default WiFi password: <strong>123456789</strong></li>
+          <li>Connect your PC to this hotspot via Windows WiFi settings</li>
+          <li>Open PlayerMaster → device appears under <strong>LAN</strong> tab automatically</li>
+          <li>Good for quick on-site access with no local router available</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>🔌 Way 3 — Both connected to same router via Ethernet</h3>
+        <p style="color: var(--subtext); font-size: 0.88rem;">Works for: <span class="tag green">LAN</span> <span class="tag">Cloud</span></p>
+        <ol class="steps" style="margin-top: 12px;">
+          <li>Plug A200 into router/switch via Ethernet cable</li>
+          <li>Plug PC into same router/switch via Ethernet cable</li>
+          <li>Open PlayerMaster — in Network settings click <strong>Connect</strong> (router mode)</li>
+          <li>Device appears under <strong>LAN</strong> tab if on same subnet</li>
+          <li>Most reliable connection — recommended for permanent installs</li>
+          <li>A200 can also reach internet through router for Cloud mode</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>🔗 Way 4 — Direct Ethernet PC to A200</h3>
+        <p style="color: var(--subtext); font-size: 0.88rem;">Works for: <span class="tag green">LAN</span> only</p>
+        <ol class="steps" style="margin-top: 12px;">
+          <li>Plug Ethernet cable directly from PC NIC to A200 LAN port</li>
+          <li>In PlayerMaster Network settings → select <strong>LAN</strong></li>
+          <li>Enter the A200's IP address manually (check A200 display or sticker)</li>
+          <li>Click <strong>Connect</strong> → wait for success confirmation</li>
+          <li>Device appears under <strong>LAN</strong> tab</li>
+          <li>Note: no internet through this method — Cloud mode not available</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- LEDMASTER CLOUD CONNECTION -->
+    <h3 style="color: var(--accent); margin-bottom: 20px; margin-top: 10px;">☁️ Connecting A200 to LEDMaster Cloud — Full Walkthrough</h3>
+
+    <div class="callout" style="margin-bottom: 24px;">
+      <div class="callout-icon">🔑</div>
+      <div>
+        <h4>Before you start — what you need</h4>
+        <p>A LEDMaster/ColorlightCloud account (contact your Colorlight distributor to get one — registration is not self-service). You need: <strong>Username</strong>, <strong>Password</strong>, and <strong>Server URL</strong> from your account setup email.</p>
+      </div>
+    </div>
+
+    <h3 style="color: var(--text); margin-bottom: 14px; font-size: 1rem;">Part 1 — Set Up the Device in the Cloud Portal (Browser)</h3>
+    <ol class="steps" style="margin-bottom: 30px;">
+      <li>Open a browser → go to <a href="https://ledmaster.colorlightcloud.com" target="_blank" style="color: var(--primary);">ledmaster.colorlightcloud.com</a> (or your assigned server URL) → log in with your account</li>
+      <li>In the left menu → click <strong>Terminal Management</strong> → click <strong>New</strong></li>
+      <li>Fill in the terminal info: give it a name (e.g., "Lobby Screen"), select a <strong>Terminal Group</strong></li>
+      <li>Note the <strong>Terminal Account</strong> that is generated — this is the LED player's login for the cloud server. <strong>Write this down.</strong></li>
+      <li>Click <strong>Submit</strong> — the new terminal appears in the list as gray/offline</li>
+      <li>To organise screens: go to <strong>Terminal Group → New Terminal Group</strong> — create groups by location or client (e.g., "Floor 1", "Lobby", "Outdoor")</li>
+    </ol>
+
+    <h3 style="color: var(--text); margin-bottom: 14px; font-size: 1rem;">Part 2 — Connect the A200 to the Cloud via PlayerMaster</h3>
+    <ol class="steps" style="margin-bottom: 30px;">
+      <li>Connect A200 to PC via USB cable → open <strong>PlayerMaster</strong></li>
+      <li>Make sure A200 is networked first (WiFi, Ethernet, or hotspot — see Ways above). It needs internet access for Cloud mode</li>
+      <li>In PlayerMaster → click the <strong>Cloud</strong> button / icon in the toolbar or bottom panel</li>
+      <li>Enter your <strong>Account</strong>, <strong>Password</strong>, and <strong>Server address</strong> (e.g., https://ledmaster.colorlightcloud.com) → click <strong>Login</strong></li>
+      <li>After successful login, you'll see your terminal groups in the left panel under the <strong>Cloud</strong> tab</li>
+      <li>Find the A200 under the <strong>USB</strong> tab → <strong>drag it</strong> into the correct Cloud group in the left panel</li>
+      <li>The device is now registered to the cloud. If the player is online and the info panel loads on the right side → <strong>connection is confirmed</strong></li>
+      <li>The device will now appear as <strong>green/online</strong> in the cloud portal browser</li>
+    </ol>
+
+    <div class="alert green" style="margin-bottom: 30px;">
+      <div class="alert-icon">✅</div>
+      <div><strong>Confirming it worked:</strong> In the LEDMaster browser portal, the device shows green. In PlayerMaster, the device appears under the Cloud tab with its info loaded on the right. From this point, you can manage it remotely without USB.</div>
+    </div>
+
+    <h3 style="color: var(--text); margin-bottom: 14px; font-size: 1rem;">Part 3 — Managing via LAN (PlayerMaster, no internet required)</h3>
+    <ol class="steps" style="margin-bottom: 30px;">
+      <li>Connect PC and A200 to same network (router, switch, or direct cable — Ways 2, 3, or 4 above)</li>
+      <li>Open PlayerMaster — device appears automatically under <strong>LAN</strong> tab when on same subnet</li>
+      <li>Click the device under LAN tab — all controls available: screen settings, publish programs, brightness, schedule</li>
+      <li>To publish content: go to <strong>Program</strong> tab → select or create a program → right-click device → <strong>Publish</strong></li>
+      <li>To adjust screen: click device → <strong>Screen Settings</strong> → Advanced Settings password: <code style="background:rgba(255,255,255,0.1); padding:2px 8px; border-radius:4px;">168</code></li>
+      <li>Changes take effect immediately — no internet required for LAN mode</li>
+    </ol>
+
+    <h3 style="color: var(--text); margin-bottom: 14px; font-size: 1rem;">Part 4 — Publishing Content via Cloud Portal (Browser)</h3>
+    <ol class="steps" style="margin-bottom: 20px;">
+      <li>Log into LEDMaster portal in browser → go to <strong>Media Management → File Upload</strong></li>
+      <li>Upload your media files (max 512MB per file, H.264 MP4, JPG, PNG supported)</li>
+      <li>Go to <strong>Program Management → New Program</strong> → set width/height to match your screen resolution</li>
+      <li>Add pages → add windows (file window, text window) → add your media assets to each window</li>
+      <li>Set play duration per asset → click the upload/save button</li>
+      <li>Go back to <strong>Program Management</strong> → select your program → click <strong>Publish</strong></li>
+      <li>Choose to publish to a <strong>Terminal Group</strong> (all screens in group) or a specific terminal</li>
+      <li>Content downloads to the device over the internet — check download status in the publish window</li>
+      <li>To set a schedule: go to <strong>Terminal Management → Schedule</strong> → select terminal group → set time, day, program</li>
+    </ol>
+
+    <div class="alert yellow">
+      <div class="alert-icon">💡</div>
+      <div><strong>Remote controls available in the cloud portal:</strong> Screenshot (see what's on screen now), Reboot device, Switch active program, Adjust brightness/color temperature/volume, Upgrade firmware — all without being on-site.</div>
+    </div>
+
   </section>
 
   <!-- COLORLIGHT CLOUD PLATFORM -->
