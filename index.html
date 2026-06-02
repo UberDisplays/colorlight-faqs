@@ -99,6 +99,16 @@
   @media (max-width: 700px) { .container { padding: 18px; } header { padding: 18px; } nav { padding: 0 8px; } nav a { padding: 10px 10px; font-size: 0.78rem; } h2 { font-size: 1.2rem; } .two-col { grid-template-columns: 1fr; } }
   footer { background: var(--mid); text-align: center; padding: 22px; color: var(--subtext); font-size: 0.83rem; border-top: 1px solid rgba(255,255,255,0.06); }
   footer a { color: var(--primary); text-decoration: none; }
+  .search-bar { background: var(--mid); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px 20px; margin-bottom: 32px; display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; }
+  .search-bar input { width: 100%; background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 11px 14px; font-size: 0.97rem; outline: none; font-family: inherit; }
+  .search-bar input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(126,184,247,0.15); }
+  .search-bar input::placeholder { color: var(--subtext); }
+  .search-stats { color: var(--subtext); font-size: 0.88rem; white-space: nowrap; }
+  .search-stats b { color: var(--accent); }
+  .hidden { display: none !important; }
+  .dl-card a.secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--subtext); }
+  .dl-card a.secondary:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+  section[data-section].hidden { display: none !important; }
 </style>
 </head>
 <body>
@@ -127,10 +137,15 @@
 
 <div class="container">
 
+  <div class="search-bar">
+    <input id="siteSearch" type="search" placeholder="Search anything — A200, flowerscreen, PlayerMaster, iSet, download, troubleshoot..." autofocus>
+    <div class="search-stats"><b id="searchCount"></b> <span id="searchLabel"></span></div>
+  </div>
+
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- QUICK REFERENCE -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <section id="quickref">
+  <section id="quickref" data-section="quickref">
     <div class="callout" style="background: linear-gradient(135deg, rgba(46,204,113,0.08), rgba(46,204,113,0.03)); border-color: rgba(46,204,113,0.25);">
       <div class="callout-icon">🔑</div>
       <div>
@@ -150,7 +165,7 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- CLOUD PLAYERS -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <section id="cloudplayers">
+  <section id="cloudplayers" data-section="cloudplayers">
     <h2>☁️ Colorlight Cloud Players — A-Series</h2>
     <p style="color: var(--subtext); margin-bottom: 22px;">Cloud players are all-in-one devices combining a media player + sending card. They connect directly to your receiving cards and LED wall, and can be managed locally via LAN or remotely via the LEDMaster/ColorlightCloud platform.</p>
 
@@ -214,7 +229,7 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- NETWORK SETUP -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <section id="network">
+  <section id="network" data-section="network">
     <h2>📡 A200 Network Connection — All 4 Methods</h2>
     <p style="color: var(--subtext); margin-bottom: 20px;">You must configure network to use LAN or Cloud mode. For direct USB-only control, skip this. Always connect via USB first to configure network settings through PlayerMaster.</p>
 
@@ -283,7 +298,7 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- LEDMASTER CLOUD -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <section id="cloud">
+  <section id="cloud" data-section="cloud">
     <h2>🌐 LEDMaster Cloud — Full Setup & Management</h2>
 
     <div class="callout" style="margin-bottom: 22px;">
@@ -386,7 +401,7 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- TROUBLESHOOTING -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <section id="troubleshooting">
+  <section id="troubleshooting" data-section="troubleshooting">
     <h2>🔧 Troubleshooting — Common Problems</h2>
 
     <div class="issue-block">
@@ -525,7 +540,7 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- SCREEN CONFIGURATION -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <section id="screenconfig">
+  <section id="screenconfig" data-section="screenconfig">
     <h2>🖥️ Screen Configuration — LEDSetting &amp; iSet</h2>
 
     <div class="callout" style="margin-bottom: 24px;">
@@ -585,7 +600,7 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- LED INDICATORS -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <section id="indicators">
+  <section id="indicators" data-section="indicators">
     <h2>🚦 Receiving Card LED Indicator Guide</h2>
     <p style="color: var(--subtext); margin-bottom: 20px;">Read the indicator lights on receiving cards to instantly diagnose where signal is lost without software.</p>
     <table class="indicator-table">
@@ -608,7 +623,7 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- PROCESSORS -->
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <section id="processors">
+  <section id="processors" data-section="processors">
     <h2>📦 Colorlight Processor Reference</h2>
     <table class="data-table" style="margin-bottom: 20px;">
       <thead><tr><th>Model</th><th>Type</th><th>Max Output</th><th>Key Features</th><th>Best For</th></tr></thead>
@@ -628,218 +643,118 @@
     </table>
     <div class="alert yellow">
       <div class="alert-icon">⚠️</div>
-      <div><strong>Pixel load limits:</strong> Each Ethernet output port on a sending card has a maximum pixel capacity. Exceeding this causes partial screens or data errors. Check the spec sheet for your exact sending card model — divide your total wall pixels by the number of ports you'll use.</div>
+      <div><strong>Pixel load limits:</strong> Each Ethernet output port on a sending card has a maximum pixel capacity. Exceeding this causes partial screens or data errors. Check the spec sheet for your exact sending card model.</div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- SOFTWARE REFERENCE -->
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <section id="software">
+  <section id="software" data-section="software">
     <h2>⚙️ Software Reference</h2>
     <div class="card-grid">
       <div class="card">
         <h3>LEDSetting</h3>
-        <p style="color: var(--subtext); font-size: 0.88rem; margin-bottom: 8px;">Primary tool for configuring receiving cards. Load .RCVBP files, set scan parameters, map screen layout, save configs to hardware. Replaced LEDVISION (discontinued).</p>
-        <p style="color: var(--subtext); font-size: 0.82rem;"><strong>Works with:</strong> All i-series, K-series, E-series, 5A-series cards</p>
-        <a href="https://en.colorlightinside.com/service/download/?cat=242" target="_blank" style="display:inline-block; margin-top:10px; color: var(--primary); font-size:0.82rem; font-weight:700;">↓ Download LEDSetting</a>
+        <p style="color:var(--subtext); font-size:0.88rem; margin-bottom:8px;">Primary tool for configuring receiving cards. Load .RCVBP files, set scan parameters, map screen layout, save configs to hardware. Replaced LEDVISION (discontinued).</p>
+        <p style="color:var(--subtext); font-size:0.82rem;"><strong>Works with:</strong> All i-series, K-series, E-series, 5A-series cards</p>
+        <a href="https://en.colorlightinside.com/service/download/?cat=242" target="_blank" style="display:inline-block; margin-top:10px; color:var(--primary); font-size:0.82rem; font-weight:700;">↓ Download LEDSetting</a>
       </div>
       <div class="card">
         <h3>iSet</h3>
-        <p style="color: var(--subtext); font-size: 0.88rem; margin-bottom: 8px;">Video processor control. Set input sources, output resolution, brightness, scaling, and presets. Real-time monitoring during events.</p>
-        <p style="color: var(--subtext); font-size: 0.82rem;"><strong>Works with:</strong> Z-series, VX-series, U-series processors</p>
-        <a href="https://en.colorlightinside.com/service/download/?cat=243" target="_blank" style="display:inline-block; margin-top:10px; color: var(--primary); font-size:0.82rem; font-weight:700;">↓ Download iSet</a>
+        <p style="color:var(--subtext); font-size:0.88rem; margin-bottom:8px;">Video processor control. Set input sources, output resolution, brightness, scaling, and presets. Real-time monitoring during events.</p>
+        <p style="color:var(--subtext); font-size:0.82rem;"><strong>Works with:</strong> Z-series, VX-series, U-series processors</p>
+        <a href="https://en.colorlightinside.com/service/download/?cat=243" target="_blank" style="display:inline-block; margin-top:10px; color:var(--primary); font-size:0.82rem; font-weight:700;">↓ Download iSet</a>
       </div>
       <div class="card">
         <h3>PlayerMaster</h3>
-        <p style="color: var(--subtext); font-size: 0.88rem; margin-bottom: 8px;">Windows software for managing A-series cloud players. Handles media, programs, schedules, screen parameters. Supports both LAN and Cloud modes.</p>
-        <p style="color: var(--subtext); font-size: 0.82rem;"><strong>Works with:</strong> A100, A200, A500, A800, A4K, C3 Pro</p>
-        <a href="https://en.colorlightinside.com/service/download/?cat=247" target="_blank" style="display:inline-block; margin-top:10px; color: var(--primary); font-size:0.82rem; font-weight:700;">↓ Download PlayerMaster</a>
+        <p style="color:var(--subtext); font-size:0.88rem; margin-bottom:8px;">Windows software for managing A-series cloud players. Handles media, programs, schedules, screen parameters. LAN and Cloud modes.</p>
+        <p style="color:var(--subtext); font-size:0.82rem;"><strong>Works with:</strong> A100, A200, A500, A800, A4K, C3 Pro</p>
+        <a href="https://en.colorlightinside.com/service/download/?cat=247" target="_blank" style="display:inline-block; margin-top:10px; color:var(--primary); font-size:0.82rem; font-weight:700;">↓ Download PlayerMaster</a>
       </div>
       <div class="card">
         <h3>ColorAdept</h3>
-        <p style="color: var(--subtext); font-size: 0.88rem; margin-bottom: 8px;">Professional calibration software. Corrects brightness uniformity, white balance, and color accuracy across the full LED wall using a calibration camera.</p>
-        <p style="color: var(--subtext); font-size: 0.82rem;"><strong>Requires:</strong> Colorlight calibration camera</p>
-        <a href="https://en.colorlightinside.com/service/download/?cat=1665" target="_blank" style="display:inline-block; margin-top:10px; color: var(--primary); font-size:0.82rem; font-weight:700;">↓ Download ColorAdept</a>
+        <p style="color:var(--subtext); font-size:0.88rem; margin-bottom:8px;">Professional calibration software. Corrects brightness uniformity, white balance, and color accuracy using a calibration camera.</p>
+        <p style="color:var(--subtext); font-size:0.82rem;"><strong>Requires:</strong> Colorlight calibration camera</p>
+        <a href="https://en.colorlightinside.com/service/download/?cat=1665" target="_blank" style="display:inline-block; margin-top:10px; color:var(--primary); font-size:0.82rem; font-weight:700;">↓ Download ColorAdept</a>
       </div>
       <div class="card">
         <h3>GrandShow</h3>
-        <p style="color: var(--subtext); font-size: 0.88rem; margin-bottom: 8px;">Content creation and playback for CS-series media servers. Multi-layer video, live inputs, effects. For complex event productions.</p>
-        <p style="color: var(--subtext); font-size: 0.82rem;"><strong>Works with:</strong> CS16K, CS20-8K Pro media servers</p>
-        <a href="https://en.colorlightinside.com/service/download/?cat=1839" target="_blank" style="display:inline-block; margin-top:10px; color: var(--primary); font-size:0.82rem; font-weight:700;">↓ Download GrandShow</a>
+        <p style="color:var(--subtext); font-size:0.88rem; margin-bottom:8px;">Content creation and playback for CS-series media servers. Multi-layer video, live inputs, effects for complex event productions.</p>
+        <p style="color:var(--subtext); font-size:0.82rem;"><strong>Works with:</strong> CS16K, CS20-8K Pro</p>
+        <a href="https://en.colorlightinside.com/service/download/?cat=1839" target="_blank" style="display:inline-block; margin-top:10px; color:var(--primary); font-size:0.82rem; font-weight:700;">↓ Download GrandShow</a>
       </div>
       <div class="card">
         <h3>LEDUpgrade</h3>
-        <p style="color: var(--subtext); font-size: 0.88rem; margin-bottom: 8px;">Batch firmware upgrade tool for sending and receiving cards. Use this to update multiple cards across a large installation quickly.</p>
-        <p style="color: var(--subtext); font-size: 0.82rem;"><strong>Always:</strong> back up config before upgrading firmware</p>
-        <a href="https://en.colorlightinside.com/service/download/?cat=959" target="_blank" style="display:inline-block; margin-top:10px; color: var(--primary); font-size:0.82rem; font-weight:700;">↓ Download LEDUpgrade</a>
+        <p style="color:var(--subtext); font-size:0.88rem; margin-bottom:8px;">Batch firmware upgrade tool for sending and receiving cards across large installations.</p>
+        <p style="color:var(--subtext); font-size:0.82rem;"><strong>Always:</strong> back up config before upgrading firmware</p>
+        <a href="https://en.colorlightinside.com/service/download/?cat=959" target="_blank" style="display:inline-block; margin-top:10px; color:var(--primary); font-size:0.82rem; font-weight:700;">↓ Download LEDUpgrade</a>
       </div>
       <div class="card">
         <h3>LED Assistant (Mobile)</h3>
-        <p style="color: var(--subtext); font-size: 0.88rem; margin-bottom: 8px;">iOS and Android app for basic control of Colorlight cloud players and screen brightness adjustment from your phone.</p>
-        <p style="color: var(--subtext); font-size: 0.82rem; margin-bottom:8px;"><strong>Download:</strong></p>
-        <a href="https://apps.apple.com/search?term=LED+Assistant+colorlight" target="_blank" style="display:inline-block; color: var(--primary); font-size:0.82rem; font-weight:700; margin-right:10px;">↓ App Store</a>
-        <a href="https://play.google.com/store/search?q=LED+Assistant+colorlight" target="_blank" style="display:inline-block; color: var(--primary); font-size:0.82rem; font-weight:700;">↓ Google Play</a>
+        <p style="color:var(--subtext); font-size:0.88rem; margin-bottom:8px;">iOS and Android app for basic control of Colorlight cloud players and brightness adjustment from your phone.</p>
+        <p style="color:var(--subtext); font-size:0.82rem; margin-bottom:8px;"><strong>Download:</strong></p>
+        <a href="https://apps.apple.com/search?term=LED+Assistant+colorlight" target="_blank" style="display:inline-block; color:var(--primary); font-size:0.82rem; font-weight:700; margin-right:10px;">↓ App Store</a>
+        <a href="https://play.google.com/store/search?q=LED+Assistant+colorlight" target="_blank" style="display:inline-block; color:var(--primary); font-size:0.82rem; font-weight:700;">↓ Google Play</a>
       </div>
       <div class="card">
         <h3>LEDMaster (Cloud Portal)</h3>
-        <p style="color: var(--subtext); font-size: 0.88rem; margin-bottom: 8px;">Browser-based cloud management platform. Remote content publishing, scheduling, device monitoring, firmware updates, and team management.</p>
-        <p style="color: var(--subtext); font-size: 0.82rem; margin-bottom:8px;"><strong>Access:</strong></p>
-        <a href="https://ledmaster.colorlightcloud.com" target="_blank" style="display:inline-block; color: var(--primary); font-size:0.82rem; font-weight:700;">↗ Open LEDMaster Portal</a>
+        <p style="color:var(--subtext); font-size:0.88rem; margin-bottom:8px;">Browser-based cloud management. Remote publishing, scheduling, device monitoring, firmware updates, and team management.</p>
+        <p style="color:var(--subtext); font-size:0.82rem; margin-bottom:8px;"><strong>Access:</strong></p>
+        <a href="https://ledmaster.colorlightcloud.com" target="_blank" style="display:inline-block; color:var(--primary); font-size:0.82rem; font-weight:700;">↗ Open LEDMaster Portal</a>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- DOWNLOADS -->
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <section id="downloads">
+  <section id="downloads" data-section="downloads">
     <h2>📥 Downloads — Software, Firmware &amp; Manuals</h2>
-    <div class="alert green" style="margin-bottom: 24px;">
+    <div class="alert green" style="margin-bottom:24px;">
       <div class="alert-icon">✅</div>
       <div>All links go to the official Colorlight download center at <strong>en.colorlightinside.com</strong>. Only use official sources to avoid outdated or tampered firmware.</div>
     </div>
-
-    <h3 style="color: var(--accent); margin-bottom: 14px;">Software</h3>
-    <div class="download-grid" style="margin-bottom: 28px;">
-      <div class="dl-card">
-        <div class="dl-icon">🛠️</div>
-        <h3>LEDSetting</h3>
-        <p>Core receiving card configuration. Intelligent Setting for auto-detection. Supports all current card series.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=242" target="_blank">Download</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">🎛️</div>
-        <h3>iSet</h3>
-        <p>Video processor control. Real-time input/output adjustment for Z-series and VX-series.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=243" target="_blank">Download</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">▶️</div>
-        <h3>PlayerMaster</h3>
-        <p>Cloud player management for A-series. LAN and Cloud mode. Media, schedule, screen settings.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=247" target="_blank">Download</a><a href="https://en.colorlightinside.com/product/special/255" target="_blank" class="secondary">Info</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">🎨</div>
-        <h3>ColorAdept</h3>
-        <p>Professional calibration. Correct uniformity and color balance across large walls.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=1665" target="_blank">Download</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">🎬</div>
-        <h3>GrandShow</h3>
-        <p>Media server software for CS16K / CS20-8K Pro. Multi-layer live event playback.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=1839" target="_blank">Download</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">🔄</div>
-        <h3>LEDUpgrade</h3>
-        <p>Batch firmware upgrade tool for sending and receiving cards across large installs.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=959" target="_blank">Download</a></div>
-      </div>
+    <h3 style="color:var(--accent); margin-bottom:14px;">Software</h3>
+    <div class="download-grid" style="margin-bottom:28px;">
+      <div class="dl-card"><div class="dl-icon">🛠️</div><h3>LEDSetting</h3><p>Core receiving card configuration. Intelligent Setting for auto-detection.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=242" target="_blank">Download</a><a href="https://en.colorlightinside.com/service/download/?cat=242" target="_blank" class="secondary">Open Page</a></div></div>
+      <div class="dl-card"><div class="dl-icon">🎛️</div><h3>iSet</h3><p>Video processor control for Z/VX series. Real-time input/output adjustment.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=243" target="_blank">Download</a><a href="https://en.colorlightinside.com/service/download/?cat=243" target="_blank" class="secondary">Open Page</a></div></div>
+      <div class="dl-card"><div class="dl-icon">▶️</div><h3>PlayerMaster</h3><p>Cloud player management for A-series. LAN and Cloud mode.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=247" target="_blank">Download</a><a href="https://en.colorlightinside.com/product/special/255" target="_blank" class="secondary">Product Info</a></div></div>
+      <div class="dl-card"><div class="dl-icon">🎨</div><h3>ColorAdept</h3><p>Professional LED display calibration for uniformity and color balance.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=1665" target="_blank">Download</a><a href="https://en.colorlightinside.com/service/download/?cat=1665" target="_blank" class="secondary">Open Page</a></div></div>
+      <div class="dl-card"><div class="dl-icon">🎬</div><h3>GrandShow</h3><p>Media server software for CS16K / CS20-8K Pro.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=1839" target="_blank">Download</a><a href="https://en.colorlightinside.com/service/download/?cat=1839" target="_blank" class="secondary">Open Page</a></div></div>
+      <div class="dl-card"><div class="dl-icon">🔄</div><h3>LEDUpgrade</h3><p>Batch firmware upgrade tool for sending and receiving cards.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=959" target="_blank">Download</a><a href="https://en.colorlightinside.com/service/download/?cat=959" target="_blank" class="secondary">Open Page</a></div></div>
     </div>
-
-    <h3 style="color: var(--accent); margin-bottom: 14px;">Manuals by Product Category</h3>
-    <div class="download-grid" style="margin-bottom: 28px;">
-      <div class="dl-card">
-        <div class="dl-icon">📄</div>
-        <h3>Video Processor Manuals</h3>
-        <p>Z-series, VX-series, U-series, X-series user manuals and spec sheets.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=199" target="_blank">Splicer Docs</a><a href="https://en.colorlightinside.com/service/download/?cat=200" target="_blank" class="secondary">Super Proc</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">📄</div>
-        <h3>LED Control System Docs</h3>
-        <p>Sender cards and receiving cards — wiring, specs, user manuals.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=601" target="_blank">Sender Docs</a><a href="https://en.colorlightinside.com/service/download/?cat=602" target="_blank" class="secondary">Receiver Docs</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">☁️</div>
-        <h3>Cloud Player Manuals</h3>
-        <p>A100, A200, A500, A800, A4K, C3 Pro — user manuals and quick start guides.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=605" target="_blank">Cloud Player Docs</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">📄</div>
-        <h3>Cloud Server Docs</h3>
-        <p>LEDMASTER and ColorlightCloud platform documentation.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=2296" target="_blank">Cloud Server Docs</a></div>
-      </div>
+    <h3 style="color:var(--accent); margin-bottom:14px;">Manuals</h3>
+    <div class="download-grid" style="margin-bottom:28px;">
+      <div class="dl-card"><div class="dl-icon">📄</div><h3>Video Processor Manuals</h3><p>Z-series, VX-series, U-series, X-series user manuals and spec sheets.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=199" target="_blank">Splicer Docs</a><a href="https://en.colorlightinside.com/service/download/?cat=200" target="_blank" class="secondary">Super Processor</a></div></div>
+      <div class="dl-card"><div class="dl-icon">📄</div><h3>LED Control System Docs</h3><p>Sender and receiver card documentation, wiring, specs.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=601" target="_blank">Sender Docs</a><a href="https://en.colorlightinside.com/service/download/?cat=602" target="_blank" class="secondary">Receiver Docs</a></div></div>
+      <div class="dl-card"><div class="dl-icon">☁️</div><h3>Cloud Player Manuals</h3><p>A100, A200, A500, A800, A4K, C3 Pro user manuals and quick start guides.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=605" target="_blank">Cloud Player Docs</a><a href="https://en.colorlightinside.com/product/download/389" target="_blank" class="secondary">A200/A100 Page</a></div></div>
+      <div class="dl-card"><div class="dl-icon">📄</div><h3>Cloud Server Docs</h3><p>LEDMASTER and ColorlightCloud platform documentation.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=2296" target="_blank">Cloud Server Docs</a></div></div>
     </div>
-
-    <h3 style="color: var(--accent); margin-bottom: 14px;">Firmware</h3>
+    <h3 style="color:var(--accent); margin-bottom:14px;">Firmware</h3>
     <div class="download-grid">
-      <div class="dl-card">
-        <div class="dl-icon">💾</div>
-        <h3>Video Splicer Firmware</h3>
-        <p>U-series and X100 Pro firmware updates.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=62" target="_blank">Download</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">💾</div>
-        <h3>Super Processor Firmware</h3>
-        <p>Z8t, Z6 PRO-G2, Z5, Z4 Pro firmware.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=231" target="_blank">Download</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">💾</div>
-        <h3>Receiving Card Firmware</h3>
-        <p>i-series, K-series, E-series, 5A-series cards.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=182" target="_blank">Download</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">💾</div>
-        <h3>Sending Card Firmware</h3>
-        <p>S2, S4, S6F, S20, S20F sender cards.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=181" target="_blank">Download</a></div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">💾</div>
-        <h3>Cloud Player Firmware</h3>
-        <p>A800, A500, A200, A100, C3 Pro, A4K/A2K.</p>
-        <div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=613" target="_blank">Download</a></div>
-      </div>
+      <div class="dl-card"><div class="dl-icon">💾</div><h3>Video Splicer Firmware</h3><p>U-series and X100 Pro firmware.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=62" target="_blank">Download</a><a href="https://en.colorlightinside.com/service/download/?cat=62" target="_blank" class="secondary">Open Page</a></div></div>
+      <div class="dl-card"><div class="dl-icon">💾</div><h3>Super Processor Firmware</h3><p>Z8t, Z6 PRO-G2, Z5, Z4 Pro firmware.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=231" target="_blank">Download</a><a href="https://en.colorlightinside.com/service/download/?cat=231" target="_blank" class="secondary">Open Page</a></div></div>
+      <div class="dl-card"><div class="dl-icon">💾</div><h3>Receiving Card Firmware</h3><p>i-series, K-series, E-series, 5A-series cards.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=182" target="_blank">Download</a><a href="https://en.colorlightinside.com/service/download/?cat=182" target="_blank" class="secondary">Open Page</a></div></div>
+      <div class="dl-card"><div class="dl-icon">💾</div><h3>Sending Card Firmware</h3><p>S2, S4, S6F, S20, S20F sender cards.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=181" target="_blank">Download</a><a href="https://en.colorlightinside.com/service/download/?cat=181" target="_blank" class="secondary">Open Page</a></div></div>
+      <div class="dl-card"><div class="dl-icon">💾</div><h3>Cloud Player Firmware</h3><p>A800, A500, A200, A100, C3 Pro, A4K/A2K.</p><div class="btn-row"><a href="https://en.colorlightinside.com/service/download/?cat=613" target="_blank">Download</a><a href="https://en.colorlightinside.com/service/download/?cat=613" target="_blank" class="secondary">Open Page</a></div></div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════════ -->
   <!-- TUTORIALS -->
-  <!-- ═══════════════════════════════════════════════════════════ -->
-  <section id="videos">
+  <section id="videos" data-section="videos">
     <h2>🎥 Tutorials &amp; Training</h2>
-    <div class="alert yellow" style="margin-bottom: 22px;">
+    <div class="alert yellow" style="margin-bottom:22px;">
       <div class="alert-icon">📺</div>
-      <div>Official tutorials at <a href="https://en.colorlightinside.com/service/videolist/" target="_blank" style="color: var(--accent);">en.colorlightinside.com/service/videolist</a> and the <a href="https://www.youtube.com/channel/UCouuXCRd3m7nWgoHF5FH_GA/videos" target="_blank" style="color: var(--accent);">Colorlight YouTube channel</a>.</div>
+      <div>Official tutorials at <a href="https://en.colorlightinside.com/service/videolist/" target="_blank" style="color:var(--accent);">en.colorlightinside.com/service/videolist</a> and the <a href="https://www.youtube.com/channel/UCouuXCRd3m7nWgoHF5FH_GA/videos" target="_blank" style="color:var(--accent);">Colorlight YouTube channel</a>.</div>
     </div>
-    <ul class="video-list" style="margin-bottom: 30px;">
-      <li>
-        <div class="video-info"><h4>Basic Settings for Receiving Card</h4><p>Official Colorlight tutorial — LEDSetting, loading .RCVBP files, scan mode setup</p></div>
-        <a href="https://en.colorlightinside.com/service/videolist/2056" target="_blank" class="play-btn">▶ Watch</a>
-      </li>
-      <li>
-        <div class="video-info"><h4>Configure i5A-F Receiving Card</h4><p>Step-by-step YouTube guide for configuring the i5A receiving card</p></div>
-        <a href="https://www.youtube.com/watch?v=T7gJtTwGi9E" target="_blank" class="play-btn">▶ Watch</a>
-      </li>
-      <li>
-        <div class="video-info"><h4>Intelligent Setting Guide (LEDSetting)</h4><p>How to auto-detect parameters for unknown LED cabinets without a spec sheet</p></div>
-        <a href="https://www.colorlitled.com/intelligent-setting-using-ledsetting/" target="_blank" class="play-btn">▶ Read</a>
-      </li>
-      <li>
-        <div class="video-info"><h4>All Official Tutorial Videos</h4><p>Full Colorlight library — processors, control systems, cloud, software</p></div>
-        <a href="https://en.colorlightinside.com/service/videolist/" target="_blank" class="play-btn">▶ Browse</a>
-      </li>
-      <li>
-        <div class="video-info"><h4>CCE Certified Colorlight Engineer Training</h4><p>Formal certification covering in-depth product knowledge and configuration</p></div>
-        <a href="https://en.colorlightinside.com/service/cce/" target="_blank" class="play-btn">▶ Info</a>
-      </li>
+    <ul class="video-list" style="margin-bottom:30px;">
+      <li><div class="video-info"><h4>Basic Settings for Receiving Card</h4><p>Official Colorlight tutorial — LEDSetting, loading .RCVBP files, scan mode setup</p></div><a href="https://en.colorlightinside.com/service/videolist/2056" target="_blank" class="play-btn">▶ Watch</a></li>
+      <li><div class="video-info"><h4>Configure i5A-F Receiving Card</h4><p>Step-by-step YouTube guide for configuring the i5A receiving card</p></div><a href="https://www.youtube.com/watch?v=T7gJtTwGi9E" target="_blank" class="play-btn">▶ Watch</a></li>
+      <li><div class="video-info"><h4>Intelligent Setting Guide (LEDSetting)</h4><p>How to auto-detect parameters for unknown LED cabinets</p></div><a href="https://www.colorlitled.com/intelligent-setting-using-ledsetting/" target="_blank" class="play-btn">▶ Read</a></li>
+      <li><div class="video-info"><h4>All Official Tutorial Videos</h4><p>Full Colorlight library — processors, control systems, cloud, software</p></div><a href="https://en.colorlightinside.com/service/videolist/" target="_blank" class="play-btn">▶ Browse</a></li>
+      <li><div class="video-info"><h4>CCE Certified Colorlight Engineer Training</h4><p>Formal certification covering in-depth product knowledge and configuration</p></div><a href="https://en.colorlightinside.com/service/cce/" target="_blank" class="play-btn">▶ Info</a></li>
     </ul>
-
-    <div style="padding: 20px; background: var(--mid); border-radius: 10px;">
-      <h3 style="color: var(--accent); margin-bottom: 12px;">📞 Colorlight Support</h3>
-      <p style="color: var(--subtext); margin-bottom: 6px;">Email: <a href="mailto:colorlight@lednets.com" style="color: var(--primary);">colorlight@lednets.com</a></p>
-      <p style="color: var(--subtext); margin-bottom: 6px;">Find local support: <a href="https://en.colorlightinside.com/about/callme/" target="_blank" style="color: var(--primary);">Service Network</a></p>
-      <p style="color: var(--subtext);">Developer portal: <a href="https://developer.colorlightcloud.com/#/home?language=en" target="_blank" style="color: var(--primary);">developer.colorlightcloud.com</a></p>
+    <div style="padding:18px; background:var(--mid); border-radius:10px;">
+      <h3 style="color:var(--accent); margin-bottom:12px;">📞 Colorlight Support</h3>
+      <p style="color:var(--subtext); margin-bottom:6px;">Email: <a href="mailto:colorlight@lednets.com" style="color:var(--primary);">colorlight@lednets.com</a></p>
+      <p style="color:var(--subtext); margin-bottom:6px;">Service Network: <a href="https://en.colorlightinside.com/about/callme/" target="_blank" style="color:var(--primary);">Find local support</a></p>
+      <p style="color:var(--subtext);">Developer portal: <a href="https://developer.colorlightcloud.com/#/home?language=en" target="_blank" style="color:var(--primary);">developer.colorlightcloud.com</a></p>
     </div>
   </section>
 
@@ -847,8 +762,34 @@
 
 <footer>
   <p>Colorlight LED Field Guide · UberDisplays · <a href="https://en.colorlightinside.com" target="_blank">en.colorlightinside.com</a></p>
-  <p style="margin-top: 4px; font-size: 0.78rem;">Sources: colorlightinside.com · manualslib.com · colorlitled.com · metroled.com · unit-led.com</p>
 </footer>
 
+<script>
+  const input = document.getElementById('siteSearch');
+  const countEl = document.getElementById('searchCount');
+  const labelEl = document.getElementById('searchLabel');
+  const sections = Array.from(document.querySelectorAll('section[data-section]'));
+
+  function search() {
+    const q = input.value.trim().toLowerCase();
+    if (!q) {
+      sections.forEach(s => s.classList.remove('hidden'));
+      countEl.textContent = '';
+      labelEl.textContent = '';
+      return;
+    }
+    let matches = 0;
+    sections.forEach(s => {
+      const text = s.innerText.toLowerCase();
+      const show = text.includes(q);
+      s.classList.toggle('hidden', !show);
+      if (show) matches++;
+    });
+    countEl.textContent = matches;
+    labelEl.textContent = matches === 1 ? 'section matches' : 'sections match';
+  }
+
+  input.addEventListener('input', search);
+</script>
 </body>
 </html>
