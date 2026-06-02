@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colorlight LED Wall Resource Guide</title>
+<style>
+  :root {
+    --primary: #e84118;
+    --dark: #1a1a2e;
+    --mid: #16213e;
+    --card: #0f3460;
+    --accent: #f5a623;
+    --green: #2ecc71;
+    --yellow: #f39c12;
+    --red: #e74c3c;
+    --text: #ecf0f1;
+    --subtext: #bdc3c7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary), #c0392b);
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  header .logo {
+    font-size: 48px;
+  }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  header p {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.95rem;
+    margin-top: 4px;
+  }
+  nav {
+    background: var(--mid);
+    padding: 0 40px;
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    border-bottom: 2px solid var(--primary);
+  }
+  nav a {
+    color: var(--subtext);
+    text-decoration: none;
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    display: inline-block;
+  }
+  nav a:hover {
+    color: var(--text);
+    border-bottom-color: var(--primary);
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+  section { margin-bottom: 60px; }
+  h2 {
+    font-size: 1.6rem;
+    color: var(--accent);
+    border-left: 5px solid var(--primary);
+    padding-left: 16px;
+    margin-bottom: 24px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .card h3 { color: var(--accent); margin-bottom: 10px; }
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+  }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .steps li::before {
+    content: counter(step);
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .alert {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .alert-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .alert.red { background: rgba(231,76,60,0.15); border-left: 4px solid var(--red); }
+  .alert.yellow { background: rgba(243,156,18,0.15); border-left: 4px solid var(--yellow); }
+  .alert.green { background: rgba(46,204,113,0.15); border-left: 4px solid var(--green); }
+  .issue-block {
+    background: var(--mid);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .issue-block h3 {
+    color: var(--red);
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .issue-block .fix {
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .issue-block ul {
+    list-style: none;
+    padding: 0;
+  }
+  .issue-block ul li {
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    color: var(--subtext);
+    font-size: 0.95rem;
+  }
+  .issue-block ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+  }
+  .download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .dl-card {
+    background: var(--mid);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .dl-card .dl-icon { font-size: 2rem; }
+  .dl-card h3 { color: var(--text); font-size: 1rem; }
+  .dl-card p { color: var(--subtext); font-size: 0.85rem; line-height: 1.5; }
+  .dl-card a {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 4px;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+  .dl-card a:hover { background: #c0392b; }
+  .dl-card a.secondary {
+    background: transparent;
+    border: 1px solid var(--subtext);
+    color: var(--subtext);
+    margin-left: 8px;
+  }
+  .dl-card a.secondary:hover { background: rgba(255,255,255,0.05); }
+  .dl-card .btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .indicator-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .indicator-table th {
+    background: var(--primary);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .indicator-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: var(--subtext);
+  }
+  .indicator-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .indicator-table td:first-child { font-weight: 600; color: var(--text); }
+  .led { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; }
+  .led.red { background: var(--red); box-shadow: 0 0 6px var(--red); }
+  .led.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .led.amber { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); }
+  .led.off { background: #555; }
+  .tag {
+    display: inline-block;
+    background: rgba(232,65,24,0.2);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .tag.green { background: rgba(46,204,113,0.15); color: var(--green); border-color: var(--green); }
+  .tag.yellow { background: rgba(243,156,18,0.15); color: var(--yellow); border-color: var(--yellow); }
+  .processor-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  .processor-table th {
+    background: var(--card);
+    color: var(--accent);
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary);
+  }
+  .processor-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--subtext);
+    vertical-align: top;
+  }
+  .processor-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .processor-table td:first-child { color: var(--text); font-weight: 600; }
+  footer {
+    background: var(--mid);
+    text-align: center;
+    padding: 24px;
+    color: var(--subtext);
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  footer a { color: var(--primary); text-decoration: none; }
+  .video-list { list-style: none; padding: 0; }
+  .video-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .video-list li:last-child { border-bottom: none; }
+  .play-btn {
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .play-btn:hover { background: #c0392b; }
+  .video-info { flex: 1; }
+  .video-info h4 { color: var(--text); font-size: 0.95rem; margin-bottom: 4px; }
+  .video-info p { color: var(--subtext); font-size: 0.85rem; }
+  .callout {
+    background: linear-gradient(135deg, rgba(232,65,24,0.1), rgba(232,65,24,0.05));
+    border: 1px solid rgba(232,65,24,0.3);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 1.5rem; }
+  .callout h4 { color: var(--accent); margin-bottom: 6px; font-size: 1rem; }
+  .callout p { color: var(--subtext); font-size: 0.9rem; }
+  .callout a { color: var(--primary); }
+  @media (max-width: 600px) {
+    .container { padding: 20px; }
+    header { padding: 20px; }
+    nav { padding: 0 10px; }
+    nav a { padding: 10px 12px; font-size: 0.8rem; }
+    h2 { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">💡</div>
+  <div>
+    <h1>Colorlight LED Wall Resource Guide</h1>
+    <p>Troubleshooting · Programming · Configuration · Downloads · Software Manuals</p>
+  </div>
+</header>
+
+<nav>
+  <a href="#troubleshooting">Troubleshooting</a>
+  <a href="#indicators">LED Indicators</a>
+  <a href="#programming">Programming</a>
+  <a href="#processors">Processors</a>
+  <a href="#cloudplayers">Cloud Players</a>
+  <a href="#cloud">Cloud Platform</a>
+  <a href="#software">Software</a>
+  <a href="#downloads">Downloads</a>
+  <a href="#videos">Tutorials</a>
+</nav>
+
+<div class="container">
+
+  <!-- QUICK REFERENCE -->
+  <section id="quickref">
+    <div class="callout">
+      <div class="callout-icon">⚡</div>
+      <div>
+        <h4>Quick Boot-Up Sequence (Always follow this order)</h4>
+        <p>Signal source (PC/player) → Video processor → Sending card → Receiving cards / LED wall. <strong>Always power down in reverse order.</strong> Wrong sequencing is a top cause of no-signal issues.</p>
+      </div>
+    </div>
+    <div class="callout" style="background: linear-gradient(135deg, rgba(46,204,113,0.08), rgba(46,204,113,0.03)); border-color: rgba(46,204,113,0.25);">
+      <div class="callout-icon">📥</div>
+      <div>
+        <h4>Official Colorlight Download Center</h4>
+        <p>All software, firmware, and manuals are available at: <a href="https://en.colorlightinside.com/service/download/" target="_blank">en.colorlightinside.com/service/download</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TROUBLESHOOTING -->
+  <section id="troubleshooting">
+    <h2>🔧 Troubleshooting Common Problems</h2>
+
+    <div class="issue-block">
+      <h3>⬛ Black Screen / No Output</h3>
+      <div class="fix">Fixes to try in order:</div>
+      <ul>
+        <li>Follow correct power-on sequence: signal source → processor → sending card → wall</li>
+        <li>Check receiver card indicator lights (see LED Indicators section below)</li>
+        <li>Verify Ethernet cables between sending card and receiving cards are seated and undamaged (use Cat5e/Cat6)</li>
+        <li>Check brightness isn't set to 0 and screen isn't in blackout/test mode in LEDSetting</li>
+        <li>Confirm signal source resolution and refresh rate match processor input settings</li>
+        <li>Reload the .RCVBP configuration file on the receiving cards via LEDSetting</li>
+        <li>Update firmware on sending and receiving cards to latest version</li>
+      </ul>
+    </div>
+
+    <div class="issue-block">
+      <h3>📶 No Signal / Signal Loss</h3>
+      <div class="fix">Fixes to try in order:</div>
+      <ul>
+        <li>Check HDMI/DVI/SDI cable at processor input — swap cable to rule out failure</li>
+        <li>Verify processor input port matches selected input source in software</li>
+        <li>Confirm signal source is outputting at a supported resolution (1920×1080 @ 60Hz is safest)</li>
+        <li>Check if sending card driver software has crashed — restart LEDSetting/iSet</li>
+        <li>Verify the sending card is listed/detected in the software's device list</li>
+        <li>Try a different port on the sending card if multiple are available</li>
+      </ul>
+    </div>
+
+    <div class="issue-block">
+      <h3>🌊 Flickering / Unstable Image</h3>
+      <div class="fix">Fixes to try in order:</div>
+      <ul>
+        <li>Check all Ethernet cable connections — wiggle cables to test for intermittent contact</li>
+        <li>Confirm power supply voltage is stable and not under-loaded (use a multimeter)</li>
+        <li>Reduce refresh rate in LEDSetting if wall hardware doesn't support the current rate</li>
+        <li>Check for damaged or corroded RJ45 connector pins</li>
+        <li>Verify scan mode and OE polarity match the LED cabinet's hardware requirements</li>
+        <li>Replace Ethernet cable between sending and receiving cards with Cat6 shielded</li>
+      </ul>
+    </div>
+
+    <div class="issue-block">
+      <h3>🎨 Color Issues / Wrong Colors</h3>
+      <div class="fix">Fixes to try in order:</div>
+      <ul>
+        <li>Check RGB data polarity settings in LEDSetting — may need to be inverted</li>
+        <li>Verify color depth setting matches the LED driver IC specifications</li>
+        <li>Run ColorAdept calibration to correct color balance</li>
+        <li>Check if a color temperature preset was accidentally applied in the processor</li>
+        <li>Confirm the correct cabinet configuration file (.RCVBP) is loaded for your exact panel model</li>
+      </ul>
+    </div>
+
+    <div class="issue-block">
+      <h3>🔲 Partial Screen / Dead Sections</h3>
+      <div class="fix">Fixes to try in order:</div>
+      <ul>
+        <li>Check Ethernet daisy-chain — if one cable is bad, all cards downstream lose signal</li>
+        <li>Test each receiving card's indicator light independently to isolate the failure point</li>
+        <li>Verify the total pixel load per network port doesn't exceed the sending card's capacity</li>
+        <li>Check if dead section corresponds to a specific Ethernet port on the sending card</li>
+        <li>Re-seat or replace the receiving card in the dead cabinet</li>
+      </ul>
+    </div>
+
+    <div class="issue-block">
+      <h3>💻 Software Can't Find Device / Not Connecting</h3>
+      <div class="fix">Fixes to try in order:</div>
+      <ul>
+        <li>Ensure PC network adapter is set to same subnet as the sending card (default: 192.168.0.x)</li>
+        <li>Disable Windows Firewall temporarily to test connectivity</li>
+        <li>Check sending card driver is installed and recognized in Device Manager</li>
+        <li>Use a direct Ethernet connection (not through a managed switch) for initial setup</li>
+        <li>Restart LEDSetting/iSet after reconnecting hardware</li>
+        <li>Check USB connection if using a USB sending card (not Ethernet-based)</li>
+      </ul>
+    </div>
+
+    <div class="issue-block">
+      <h3>🌫️ Flowerscreen / Garbled Image (花屏)</h3>
+      <div class="fix">Fixes to try in order:</div>
+      <ul>
+        <li>This is almost always a configuration file mismatch — load the correct .RCVBP file for your panel</li>
+        <li>Check scan mode setting (1/4, 1/8, 1/16, 1/32 scan) matches cabinet hardware</li>
+        <li>Verify data polarity and OE polarity settings match the driver IC datasheet</li>
+        <li>Confirm cabinet width × height pixel dimensions are correctly entered in LEDSetting</li>
+        <li>Use LEDSetting's "Intelligent Setting" feature to auto-detect parameters</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LED INDICATORS -->
+  <section id="indicators">
+    <h2>🚦 Receiving Card LED Indicator Guide</h2>
+    <p style="color: var(--subtext); margin-bottom: 20px;">Colorlight receiving cards have red and green indicator lights. Learn to read them for instant diagnosis.</p>
+
+    <table class="indicator-table">
+      <thead>
+        <tr>
+          <th>Red Light</th>
+          <th>Green Light</th>
+          <th>Meaning</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="led off"></span>OFF</td>
+          <td>Any</td>
+          <td>No power to receiving card</td>
+          <td>Check power supply voltage (typically 5V)</td>
+        </tr>
+        <tr>
+          <td><span class="led red"></span>ON (solid)</td>
+          <td><span class="led off"></span>OFF</td>
+          <td>Power OK — No data signal from sending card</td>
+          <td>Check Ethernet cable and sending card output</td>
+        </tr>
+        <tr>
+          <td><span class="led red"></span>ON</td>
+          <td>Very slow flash (1×/5 sec)</td>
+          <td>Power OK — No network communication</td>
+          <td>Check sending card and Ethernet cable in the daisy chain</td>
+        </tr>
+        <tr>
+          <td><span class="led red"></span>ON</td>
+          <td>3 quick flashes then pause</td>
+          <td>No video source input to sending card</td>
+          <td>Check signal source connection and input selection on processor</td>
+        </tr>
+        <tr>
+          <td><span class="led red"></span>ON</td>
+          <td><span class="led green"></span>Normal fast flash</td>
+          <td>Normal operation — receiving data</td>
+          <td>System healthy</td>
+        </tr>
+        <tr>
+          <td><span class="led red"></span>ON</td>
+          <td><span class="led green"></span>Solid ON</td>
+          <td>Receiving card in test pattern mode</td>
+          <td>Exit test mode in LEDSetting software</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PROGRAMMING -->
+  <section id="programming">
+    <h2>🖥️ Programming & Configuration Walkthrough</h2>
+
+    <div class="card-grid" style="margin-bottom: 30px;">
+      <div class="card">
+        <h3>Step 1: Hardware Connections</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem;">Connect signal source → processor input. Connect processor output → sending card input. Run Cat5e/Cat6 from sending card ports to receiving card input. Daisy-chain receiving cards across cabinets.</p>
+      </div>
+      <div class="card">
+        <h3>Step 2: PC Network Setup</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem;">Set PC NIC to static IP: <strong>192.168.0.100</strong>, subnet <strong>255.255.255.0</strong>. Colorlight sending cards default to 192.168.0.x range. Disable other network adapters to avoid conflicts.</p>
+      </div>
+      <div class="card">
+        <h3>Step 3: Install LEDSetting</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem;">Download and install LEDSetting from the official site. Run as Administrator. Open the software and confirm the sending card is detected under "Hardware" tab.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-bottom: 16px; color: var(--accent);">LEDSetting — Cabinet Configuration Process</h3>
+    <ol class="steps">
+      <li>Open LEDSetting → click <strong>Hardware Manager</strong> → confirm sending card detected</li>
+      <li>Click <strong>Receiving Card</strong> → select your receiving card model (e.g., i5A, K8, E320)</li>
+      <li>Click <strong>Load from File</strong> and select the correct <strong>.RCVBP</strong> configuration file for your LED cabinet model</li>
+      <li>If no file available, use <strong>Intelligent Setting</strong>: enter cabinet pixel width × height, select scan mode and driver IC type from the cabinet spec sheet</li>
+      <li>Click <strong>Send to Hardware</strong> — the screen should display correctly. Check for flowerscreen (if so, review scan mode)</li>
+      <li>Go to <strong>Screen Connection</strong> tab — define how cabinets are physically laid out (rows × columns, connection direction)</li>
+      <li>Set input resolution and map it to the screen area in <strong>Sender Config</strong></li>
+      <li>Save the configuration and write to flash/EEPROM so it persists through power cycles</li>
+    </ol>
+
+    <h3 style="margin-bottom: 16px; color: var(--accent); margin-top: 30px;">iSet — Quick Setup for Video Processors</h3>
+    <ol class="steps">
+      <li>Connect PC to processor via Ethernet — open iSet software</li>
+      <li>Select the processor model from the device list</li>
+      <li>Set <strong>Input</strong>: choose source (HDMI/DVI/SDI), confirm resolution and refresh rate</li>
+      <li>Set <strong>Output</strong>: define the output canvas size matching your LED wall total pixel dimensions</li>
+      <li>Configure <strong>Scaling</strong>: choose fill mode (stretch, letterbox, native) to match your content</li>
+      <li>Adjust <strong>Brightness</strong>, contrast, and color settings as needed</li>
+      <li>Save preset — name it clearly (e.g., "Stage Left 1920x1080 HDMI")</li>
+    </ol>
+
+    <div class="alert yellow" style="margin-top: 20px;">
+      <div class="alert-icon">⚠️</div>
+      <div>
+        <strong>Configuration File Tip:</strong> Always keep a backup copy of your .RCVBP files and processor presets on a USB drive on-site. A corrupted or missing config file is the #1 cause of emergency troubleshooting calls.
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESSORS -->
+  <section id="processors">
+    <h2>📦 Colorlight Processor Reference</h2>
+
+    <table class="processor-table">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Type</th>
+          <th>Max Output</th>
+          <th>Key Features</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Z8t</td>
+          <td><span class="tag">Super Processor</span></td>
+          <td>16K×2K</td>
+          <td>8K input, HDR, seamless switching, multi-layer</td>
+          <td>Large-scale installs, broadcast</td>
+        </tr>
+        <tr>
+          <td>Z6 PRO-G2</td>
+          <td><span class="tag">Super Processor</span></td>
+          <td>16M pixels</td>
+          <td>12G-SDI, genlock, advanced image processing</td>
+          <td>Broadcast, concert, high-end events</td>
+        </tr>
+        <tr>
+          <td>U9 Max</td>
+          <td><span class="tag">Video Splicer</span></td>
+          <td>9 outputs</td>
+          <td>Independent input per output, 4K input</td>
+          <td>Multi-zone display, control rooms</td>
+        </tr>
+        <tr>
+          <td>U15 Max</td>
+          <td><span class="tag">Video Splicer</span></td>
+          <td>15 outputs</td>
+          <td>Massive multi-screen splicer, high pixel count</td>
+          <td>Stadium/arena large displays</td>
+        </tr>
+        <tr>
+          <td>VX20</td>
+          <td><span class="tag yellow">Processor</span></td>
+          <td>~10M pixels</td>
+          <td>Multiple inputs, integrated sending, easy setup</td>
+          <td>Mid-size events, rental displays</td>
+        </tr>
+        <tr>
+          <td>VX12F</td>
+          <td><span class="tag yellow">Processor</span></td>
+          <td>~6M pixels</td>
+          <td>Fiber output, all-in-one processor+sender</td>
+          <td>Touring, long-distance signal</td>
+        </tr>
+        <tr>
+          <td>X20</td>
+          <td><span class="tag green">Multimedia</span></td>
+          <td>~4M pixels</td>
+          <td>Internal media player, scheduling, cloud ready</td>
+          <td>Retail, fixed installs, digital signage</td>
+        </tr>
+        <tr>
+          <td>X40m</td>
+          <td><span class="tag green">Multimedia</span></td>
+          <td>~8M pixels</td>
+          <td>Built-in Android player, WiFi, 4K decoding</td>
+          <td>Large fixed signage, hospitality</td>
+        </tr>
+        <tr>
+          <td>S20</td>
+          <td><span class="tag">Sender Card</span></td>
+          <td>~10M pixels</td>
+          <td>Standalone sending card, Gigabit Ethernet ports</td>
+          <td>Use with existing processors</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CLOUD PLAYERS -->
+  <section id="cloudplayers">
+    <h2>☁️ Colorlight Cloud Players — A-Series</h2>
+    <p style="color: var(--subtext); margin-bottom: 24px;">Cloud players are all-in-one devices that combine a media player + sending card. They connect directly to receiving cards and can be managed remotely via PlayerMaster software or the ColorlightCloud / LEDMASTER platform.</p>
+
+    <table class="processor-table" style="margin-bottom: 30px;">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Max Pixels</th>
+          <th>Outputs</th>
+          <th>Connectivity</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A100</td>
+          <td>1.3M pixels</td>
+          <td>2× Ethernet</td>
+          <td>WiFi, LAN, 4G (opt)</td>
+          <td>Small signs, entry-level installs</td>
+        </tr>
+        <tr>
+          <td>A200</td>
+          <td>2.3M pixels</td>
+          <td>4× Ethernet</td>
+          <td>WiFi, LAN, 4G (opt)</td>
+          <td>Medium displays, retail, events</td>
+        </tr>
+        <tr>
+          <td>A500</td>
+          <td>52M pixels</td>
+          <td>Multiple</td>
+          <td>WiFi, LAN, 4G (opt)</td>
+          <td>Large outdoor/indoor installs</td>
+        </tr>
+        <tr>
+          <td>A800</td>
+          <td>High capacity</td>
+          <td>Multiple</td>
+          <td>WiFi, LAN, 4G (opt)</td>
+          <td>Large-scale cloud-managed displays</td>
+        </tr>
+        <tr>
+          <td>A4K / A2K</td>
+          <td>High-res 4K</td>
+          <td>Multiple</td>
+          <td>WiFi, LAN</td>
+          <td>High-definition fine-pitch displays</td>
+        </tr>
+        <tr>
+          <td>C3 Pro</td>
+          <td>Mid-range</td>
+          <td>Multiple</td>
+          <td>WiFi, LAN</td>
+          <td>Compact installs, easy deployment</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="color: var(--accent); margin-bottom: 16px;">A200 — Full Setup Walkthrough</h3>
+    <ol class="steps">
+      <li>Connect A200 power. Connect A200 Ethernet output ports to receiving card inputs using Cat5e/Cat6 cables.</li>
+      <li>Connect A200 to your network via LAN cable (or configure WiFi later). Connect PC to same network.</li>
+      <li>Download and install <strong>PlayerMaster</strong> on your Windows PC from <a href="https://en.colorlightinside.com/service/download/?cat=247" target="_blank" style="color: var(--primary);">en.colorlightinside.com</a></li>
+      <li>Open PlayerMaster → the A200 should appear automatically if on the same LAN. If not, click <strong>Search Device</strong>.</li>
+      <li>Click the A200 in the device list → go to <strong>Screen Settings</strong> → load your <strong>.RCVBP</strong> cabinet config file (same as you'd use in LEDSetting)</li>
+      <li>Set screen width × height in pixels, connection topology (cabinet layout), and brightness</li>
+      <li>Go to <strong>Program</strong> tab → click <strong>Add Program</strong> → add your media files (video, images, text)</li>
+      <li>Set program duration and layout zones if using split-screen</li>
+      <li>Click <strong>Publish</strong> → content is sent to the A200 and plays immediately</li>
+      <li>To schedule content: go to <strong>Schedule</strong> tab → set time-based rules for which programs play when</li>
+    </ol>
+
+    <div class="alert yellow" style="margin-top: 20px;">
+      <div class="alert-icon">🔑</div>
+      <div><strong>Default Advanced Settings Password:</strong> <code style="background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px;">168</code> — used in PlayerMaster to access screen parameter settings and advanced config options.</div>
+    </div>
+
+    <h3 style="color: var(--accent); margin-bottom: 16px; margin-top: 30px;">A200 Troubleshooting</h3>
+    <div class="issue-block">
+      <h3>🔍 A200 Not Found in PlayerMaster</h3>
+      <div class="fix">Fixes to try in order:</div>
+      <ul>
+        <li>Confirm PC and A200 are on the same LAN subnet</li>
+        <li>Disable Windows Firewall temporarily and re-search</li>
+        <li>Try connecting A200 directly to PC via Ethernet (no switch)</li>
+        <li>Check A200 indicator light — solid green = powered and booted correctly</li>
+        <li>Try connecting via USB cable instead of LAN for initial setup</li>
+        <li>Restart the A200 and wait 60 seconds before searching again</li>
+      </ul>
+    </div>
+    <div class="issue-block">
+      <h3>📡 A200 Online but Content Not Playing</h3>
+      <div class="fix">Fixes to try in order:</div>
+      <ul>
+        <li>Confirm the program was successfully <strong>Published</strong> (check publish status in PlayerMaster)</li>
+        <li>Check that screen parameters (resolution, cabinet config) are correctly saved on the device</li>
+        <li>Verify media file formats are supported: H.264/H.265 MP4, JPG, PNG, BMP</li>
+        <li>Check schedule — if a schedule is active, it may be overriding manual playback</li>
+        <li>Check storage — A200 has 8GB internal; delete old programs if storage is full</li>
+      </ul>
+    </div>
+    <div class="issue-block">
+      <h3>🌐 A200 Not Connecting to ColorlightCloud</h3>
+      <div class="fix">Fixes to try in order:</div>
+      <ul>
+        <li>Confirm A200 has internet access (ping test from the device network)</li>
+        <li>In PlayerMaster → Network → verify correct cloud server address is entered</li>
+        <li>Check account credentials for ColorlightCloud / LEDMASTER platform</li>
+        <li>Verify the device is registered/added to your cloud account</li>
+        <li>Try switching from WiFi to wired LAN for more stable cloud connectivity</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- COLORLIGHT CLOUD PLATFORM -->
+  <section id="cloud">
+    <h2>🌐 ColorlightCloud & LEDMASTER Platform</h2>
+    <p style="color: var(--subtext); margin-bottom: 24px;">Colorlight offers two cloud management platforms for remotely controlling and scheduling content on multiple displays from anywhere.</p>
+
+    <div class="card-grid" style="margin-bottom: 30px;">
+      <div class="card">
+        <h3>ColorlightCloud</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem; margin-bottom: 10px;">The main cloud SaaS platform. Manage unlimited screens remotely — push content, set schedules, monitor device status, and get alerts via email. Role-based user management for teams.</p>
+        <p style="color: var(--subtext); font-size: 0.85rem;"><strong>Access:</strong> <a href="https://en.colorlightinside.com/product/special/2299" target="_blank" style="color: var(--primary);">ColorlightCloud Product Page</a></p>
+      </div>
+      <div class="card">
+        <h3>LEDMASTER</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem; margin-bottom: 10px;">Colorlight's cloud server solution for larger deployments. Centralized device management, content distribution, and monitoring. Can be self-hosted or cloud-hosted.</p>
+        <p style="color: var(--subtext); font-size: 0.85rem;"><strong>Access:</strong> <a href="https://ledmaster.colorlightcloud.com/" target="_blank" style="color: var(--primary);">ledmaster.colorlightcloud.com</a></p>
+      </div>
+      <div class="card">
+        <h3>PlayerMaster (LAN Mode)</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem; margin-bottom: 10px;">Use PlayerMaster locally without cloud — manage all A-series players on your LAN directly. No internet required. Switch between LAN and Cloud mode in the software settings.</p>
+        <p style="color: var(--subtext); font-size: 0.85rem;"><strong>Best for:</strong> On-site management, venues without reliable internet</p>
+      </div>
+    </div>
+
+    <h3 style="color: var(--accent); margin-bottom: 16px;">ColorlightCloud — Getting Started</h3>
+    <ol class="steps">
+      <li>Register at the ColorlightCloud platform — contact your Colorlight distributor for account setup or register at the portal</li>
+      <li>In PlayerMaster on your PC: click the <strong>Cloud</strong> button in the bottom toolbar → enter your account, password, and server address → click <strong>Login</strong></li>
+      <li>Add your A-series devices to the cloud account — devices must have internet access (LAN or WiFi)</li>
+      <li>Go to <strong>Device</strong> tab — your screens appear here. Organize them into <strong>Groups</strong> (e.g., by location, zone, client)</li>
+      <li>Go to <strong>Program</strong> tab → create programs with your media content (video, images, text tickers)</li>
+      <li>Go to <strong>Schedule</strong> tab → assign programs to screens or groups on a time-based schedule</li>
+      <li>Click <strong>Publish</strong> — content pushes to all assigned screens over the internet</li>
+      <li>Monitor device online/offline status, storage, and playback from the <strong>Device</strong> dashboard</li>
+    </ol>
+
+    <h3 style="color: var(--accent); margin-bottom: 16px; margin-top: 30px;">Platform Feature Overview</h3>
+    <table class="indicator-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>ColorlightCloud</th>
+          <th>PlayerMaster (LAN)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Remote access (anywhere)</td>
+          <td>✅ Yes</td>
+          <td>❌ Same network only</td>
+        </tr>
+        <tr>
+          <td>Requires internet on player</td>
+          <td>✅ Yes</td>
+          <td>❌ No</td>
+        </tr>
+        <tr>
+          <td>Content scheduling</td>
+          <td>✅ Yes</td>
+          <td>✅ Yes</td>
+        </tr>
+        <tr>
+          <td>Multi-screen groups</td>
+          <td>✅ Yes</td>
+          <td>✅ Yes</td>
+        </tr>
+        <tr>
+          <td>Device status monitoring</td>
+          <td>✅ Yes + email alerts</td>
+          <td>✅ Basic</td>
+        </tr>
+        <tr>
+          <td>Multi-user / team access</td>
+          <td>✅ Role-based</td>
+          <td>❌ Single PC</td>
+        </tr>
+        <tr>
+          <td>GPS / geo-fence</td>
+          <td>✅ Yes</td>
+          <td>❌ No</td>
+        </tr>
+        <tr>
+          <td>Sync multiple screens</td>
+          <td>✅ GPS or NTP sync</td>
+          <td>✅ NTP sync</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert yellow" style="margin-top: 20px;">
+      <div class="alert-icon">💡</div>
+      <div><strong>LAN vs Cloud tip:</strong> For permanent installs with reliable internet, use Cloud mode for remote management. For touring/event use or unreliable networks, use LAN mode — the A200 will keep playing its last published program even if it loses network connection.</div>
+    </div>
+  </section>
+
+  <!-- SOFTWARE SETUP -->
+  <section id="software">
+    <h2>⚙️ Software Reference</h2>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>LEDSetting</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem; margin-bottom: 10px;">Primary tool for configuring receiving cards and LED cabinets. Use this to load .RCVBP files, set scan parameters, map screen layout, and save configs to hardware.</p>
+        <p style="color: var(--subtext); font-size: 0.85rem;"><strong>Replaces:</strong> LEDVISION (discontinued)</p>
+      </div>
+      <div class="card">
+        <h3>iSet</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem; margin-bottom: 10px;">Video processor control software. Set input sources, output resolution, brightness, scaling, and presets. Use for real-time monitoring and adjustments during events.</p>
+        <p style="color: var(--subtext); font-size: 0.85rem;"><strong>Works with:</strong> Z-series, VX-series processors</p>
+      </div>
+      <div class="card">
+        <h3>PlayerMaster</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem; margin-bottom: 10px;">Windows-based cloud player management software. Manage media, programs, schedules, and screen parameters for Colorlight cloud players (A-series, C3 Pro).</p>
+        <p style="color: var(--subtext); font-size: 0.85rem;"><strong>Use for:</strong> Digital signage, scheduled playback</p>
+      </div>
+      <div class="card">
+        <h3>ColorAdept</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem; margin-bottom: 10px;">Professional calibration software for color accuracy. Corrects uniformity, white balance, and brightness across the LED wall using measurement hardware.</p>
+        <p style="color: var(--subtext); font-size: 0.85rem;"><strong>Requires:</strong> Colorlight calibration camera</p>
+      </div>
+      <div class="card">
+        <h3>GrandShow</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem; margin-bottom: 10px;">Content creation and playback software for media servers (CS16K, CS20-8K Pro). Manage layers, effects, and live inputs for complex event productions.</p>
+        <p style="color: var(--subtext); font-size: 0.85rem;"><strong>Use for:</strong> Live events, media server control</p>
+      </div>
+      <div class="card">
+        <h3>LED Assistant (Mobile)</h3>
+        <p style="color: var(--subtext); font-size: 0.9rem; margin-bottom: 10px;">Mobile app (iOS/Android) for controlling Colorlight cloud players and basic screen adjustments from your phone on the go.</p>
+        <p style="color: var(--subtext); font-size: 0.85rem;"><strong>Download:</strong> App Store / Google Play</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOADS -->
+  <section id="downloads">
+    <h2>📥 Software & Manual Downloads</h2>
+
+    <div class="alert green" style="margin-bottom: 24px;">
+      <div class="alert-icon">✅</div>
+      <div>All links below go directly to Colorlight's official download center at <strong>en.colorlightinside.com</strong>. Always use official sources to avoid outdated or modified firmware.</div>
+    </div>
+
+    <h3 style="color: var(--accent); margin-bottom: 16px;">Software Downloads</h3>
+    <div class="download-grid" style="margin-bottom: 32px;">
+
+      <div class="dl-card">
+        <div class="dl-icon">🛠️</div>
+        <h3>LEDSetting</h3>
+        <p>Core receiving card configuration software. Supports all i-series, K-series, E-series cards. Includes Intelligent Setting for auto-detection.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=242" target="_blank">Download</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">🎛️</div>
+        <h3>iSet</h3>
+        <p>Video processor control and monitoring. Real-time adjustment of inputs, outputs, scaling and presets for Z/VX series processors.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=243" target="_blank">Download</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">▶️</div>
+        <h3>PlayerMaster</h3>
+        <p>Cloud player management for A-series and C3 Pro players. Media, schedule, and program management.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=247" target="_blank">Download</a>
+          <a href="https://en.colorlightinside.com/product/special/255" target="_blank" class="secondary">Product Page</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">🎨</div>
+        <h3>ColorAdept</h3>
+        <p>Professional LED display calibration. Improves color uniformity and brightness consistency across large walls.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=1665" target="_blank">Download</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">🎬</div>
+        <h3>GrandShow</h3>
+        <p>Media server software for CS16K / CS20-8K Pro. Multi-layer video playback, live input management for events.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=1839" target="_blank">Download</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">🔄</div>
+        <h3>LEDUpgrade</h3>
+        <p>Firmware upgrade tool for receiving cards and sending cards. Required for batch firmware updates on large installations.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=959" target="_blank">Download</a>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 style="color: var(--accent); margin-bottom: 16px;">Manuals & Documents by Category</h3>
+    <div class="download-grid" style="margin-bottom: 32px;">
+
+      <div class="dl-card">
+        <div class="dl-icon">📄</div>
+        <h3>Video Processor Manuals</h3>
+        <p>User manuals and specs for Z-series, VX-series, U-series, and X-series processors.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=199" target="_blank">Video Splicer Docs</a>
+          <a href="https://en.colorlightinside.com/service/download/?cat=200" target="_blank" class="secondary">Super Processor</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">📄</div>
+        <h3>LED Control System Docs</h3>
+        <p>Sender card and receiving card documentation, wiring guides, and specs.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=601" target="_blank">Sender Docs</a>
+          <a href="https://en.colorlightinside.com/service/download/?cat=602" target="_blank" class="secondary">Receiver Docs</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">☁️</div>
+        <h3>Colorlight Cloud Docs</h3>
+        <p>Cloud player manuals (A800, A500, A200, C3 Pro) and cloud server (LEDMASTER, ColorlightCloud) documentation.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=605" target="_blank">Cloud Player</a>
+          <a href="https://en.colorlightinside.com/service/download/?cat=2296" target="_blank" class="secondary">Cloud Server</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">📺</div>
+        <h3>Media Server Docs</h3>
+        <p>Manuals and specs for CS16K and CS20-8K Pro media servers.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=194" target="_blank">Media Server Docs</a>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 style="color: var(--accent); margin-bottom: 16px;">Firmware Downloads</h3>
+    <div class="download-grid">
+
+      <div class="dl-card">
+        <div class="dl-icon">💾</div>
+        <h3>Video Splicer Firmware</h3>
+        <p>Firmware for U-series and X100 Pro video splicers.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=62" target="_blank">Download</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">💾</div>
+        <h3>Super Processor Firmware</h3>
+        <p>Firmware updates for Z-series super processors (Z8t, Z6 PRO-G2, Z5/Z4 Pro).</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=231" target="_blank">Download</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">💾</div>
+        <h3>Receiving Card Firmware</h3>
+        <p>Firmware for i-series, K-series, E-series, and 5A-series receiving cards.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=182" target="_blank">Download</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">💾</div>
+        <h3>Sending Card Firmware</h3>
+        <p>Firmware for S2, S4, S6F, S20 sender cards.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=181" target="_blank">Download</a>
+        </div>
+      </div>
+
+      <div class="dl-card">
+        <div class="dl-icon">💾</div>
+        <h3>Cloud Player Firmware</h3>
+        <p>Firmware for A800, A500, A200, A100, C3 Pro, A4K/A2K cloud players.</p>
+        <div class="btn-row">
+          <a href="https://en.colorlightinside.com/service/download/?cat=613" target="_blank">Download</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TUTORIAL VIDEOS -->
+  <section id="videos">
+    <h2>🎥 Tutorial Videos & Training</h2>
+
+    <div class="alert yellow" style="margin-bottom: 24px;">
+      <div class="alert-icon">📺</div>
+      <div>Official Colorlight tutorial videos are available at <a href="https://en.colorlightinside.com/service/videolist/" target="_blank" style="color: var(--accent);">en.colorlightinside.com/service/videolist</a>. Additional tutorials on YouTube at the <a href="https://www.youtube.com/channel/UCouuXCRd3m7nWgoHF5FH_GA/videos" target="_blank" style="color: var(--accent);">Colorlight official YouTube channel</a>.</div>
+    </div>
+
+    <ul class="video-list">
+      <li>
+        <div class="video-info">
+          <h4>Basic Settings for Receiving Card</h4>
+          <p>Official Colorlight tutorial — covers LEDSetting, loading config files, scan mode setup</p>
+        </div>
+        <a href="https://en.colorlightinside.com/service/videolist/2056" target="_blank" class="play-btn">▶ Watch</a>
+      </li>
+      <li>
+        <div class="video-info">
+          <h4>How to Configure i5A-F Receiving Card</h4>
+          <p>Step-by-step YouTube tutorial on configuring the i5A receiving card for LED display setup</p>
+        </div>
+        <a href="https://www.youtube.com/watch?v=T7gJtTwGi9E" target="_blank" class="play-btn">▶ Watch</a>
+      </li>
+      <li>
+        <div class="video-info">
+          <h4>All Official Tutorial Videos</h4>
+          <p>Full library of Colorlight training videos covering processors, control systems, software, and cloud</p>
+        </div>
+        <a href="https://en.colorlightinside.com/service/videolist/" target="_blank" class="play-btn">▶ Browse All</a>
+      </li>
+      <li>
+        <div class="video-info">
+          <h4>CCE Certified Colorlight Engineer Training</h4>
+          <p>Formal certification program covering in-depth product knowledge and configuration</p>
+        </div>
+        <a href="https://en.colorlightinside.com/service/cce/" target="_blank" class="play-btn">▶ Learn More</a>
+      </li>
+      <li>
+        <div class="video-info">
+          <h4>Intelligent Setting Guide (LEDSetting)</h4>
+          <p>How to use auto-detection to configure unknown LED cabinets without a spec sheet</p>
+        </div>
+        <a href="https://www.colorlitled.com/intelligent-setting-using-ledsetting/" target="_blank" class="play-btn">▶ Read Guide</a>
+      </li>
+    </ul>
+
+    <div style="margin-top: 30px; padding: 20px; background: var(--mid); border-radius: 10px;">
+      <h3 style="color: var(--accent); margin-bottom: 12px;">📞 Colorlight Support Contact</h3>
+      <p style="color: var(--subtext); margin-bottom: 8px;">Email: <a href="mailto:colorlight@lednets.com" style="color: var(--primary);">colorlight@lednets.com</a></p>
+      <p style="color: var(--subtext); margin-bottom: 8px;">Service Network: <a href="https://en.colorlightinside.com/about/callme/" target="_blank" style="color: var(--primary);">Find local support</a></p>
+      <p style="color: var(--subtext);">Developer Portal: <a href="https://developer.colorlightcloud.com/#/home?language=en" target="_blank" style="color: var(--primary);">developer.colorlightcloud.com</a></p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>Colorlight LED Wall Resource Guide · Built for UberDisplays · <a href="https://en.colorlightinside.com" target="_blank">en.colorlightinside.com</a></p>
+  <p style="margin-top: 6px; font-size: 0.8rem;">Sources: Colorlight official site, en.colorlightinside.com · unit-led.com · colorlitled.com · ledincloud.com</p>
+</footer>
+
+</body>
+</html>
